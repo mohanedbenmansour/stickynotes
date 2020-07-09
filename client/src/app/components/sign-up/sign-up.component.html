@@ -1,0 +1,95 @@
+<app-sign-in></app-sign-in>
+<div class="container">
+  <div class="row">
+    <div class="col-sm-7 pt-5">
+      <h2>
+        welcome to
+        <a class="text-danger">Sticky notes</a>
+        , here you can add your notes and save them into your account feel free
+        to register if you dont have an account.
+      </h2>
+    </div>
+    <div class="col-sm-5">
+      <h1 class="text-danger text-center">register</h1>
+      <form
+        #signUpForm="ngForm"
+        (ngSubmit)="signUpForm.valid && onSubmit(signUpForm)"
+      >
+        <div class="form-group">
+          <label for="name">Name</label>
+          <input
+            type="text"
+            class="form-control"
+            name="name"
+            #name="ngModel"
+            [(ngModel)]="userService.newUser.name"
+            placeholder="Name"
+            minlength="3"
+            required
+          />
+          <div *ngIf="!name.valid && signUpForm.submitted">
+            <label class="alert alert-danger" *ngIf="name.errors?.required"
+              >This field is required.</label
+            >
+            <label *ngIf="name.errors?.minlength" class="alert alert-danger"
+              >Enter at least 3 characters.</label
+            >
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="email">Email address</label>
+          <input
+            type="email"
+            class="form-control"
+            name="email"
+            #email="ngModel"
+            [(ngModel)]="userService.newUser.email"
+            placeholder="Email"
+            required
+            [pattern]="emailRegex"
+          />
+          <div *ngIf="!email.valid && signUpForm.submitted">
+            <label *ngIf="email.errors?.required" class="alert alert-danger"
+              >This field is required.</label
+            >
+            <label *ngIf="email.errors?.pattern" class="alert alert-danger"
+              >Invalid email address.</label
+            >
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="Password">Password</label>
+          <input
+            type="password"
+            class="form-control"
+            name="password"
+            #password="ngModel"
+            [(ngModel)]="userService.newUser.password"
+            placeholder="Password"
+            minlength="3"
+            required
+          />
+          <div *ngIf="!password.valid && signUpForm.submitted">
+            <label *ngIf="password.errors?.required" class="alert alert-danger"
+              >This field is required.</label
+            >
+            <label *ngIf="password.errors?.minlength" class="alert alert-danger"
+              >Enter at least 3 characters.</label
+            >
+          </div>
+        </div>
+
+        <button type="submit" class="btn btn-danger" value="Submit">
+          Register
+        </button>
+      </form>
+
+      <div class="text-success" *ngIf="registerDone">
+        registration completed successfully
+      </div>
+      <div class="text-danger" *ngIf="serverError">
+        internal server error try again later
+      </div>
+    </div>
+  </div>
+</div>

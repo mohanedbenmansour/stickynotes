@@ -1,0 +1,42 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <a class="navbar-brand text-primary"> Sticky notes</a>
+
+  <form
+    #signInForm="ngForm"
+    (ngSubmit)="signInForm.valid && onSubmit(signInForm)"
+    class="form-inline ml-auto"
+  >
+    <input
+      type="email"
+      class="form-control"
+      name="email"
+      #email="ngModel"
+      [(ngModel)]="userModel.email"
+      placeholder="Email"
+      required
+    />
+
+    <input
+      type="password"
+      class="form-control"
+      name="password"
+      #password="ngModel"
+      [(ngModel)]="userModel.password"
+      placeholder="password"
+      minlength="3"
+      required
+    />
+
+    <button
+      type="submit"
+      class="btn btn-primary"
+      value="Submit"
+      [disabled]="!signInForm.form.valid"
+    >
+      Sign in
+    </button>
+  </form>
+  <div *ngIf="this.serverError">
+    <p class="text-danger p-2">Try again !!</p>
+  </div>
+</nav>
