@@ -15,18 +15,14 @@ export class UserService {
   noAuthHeader = { headers: new HttpHeaders({ NoAuth: 'True' }) };
   constructor(private http: HttpClient) {}
   createUser(user: User) {
-    return this.http.post(environment.baseUri + '/register', user);
+    return this.http.post('/register', user);
   }
   login(authCredentials) {
-    return this.http.post(
-      environment.baseUri + '/login',
-      authCredentials,
-      this.noAuthHeader
-    );
+    return this.http.post('/login', authCredentials, this.noAuthHeader);
   }
 
   getUserProfile() {
-    return this.http.get(environment.baseUri + '/getuser');
+    return this.http.get('/getuser');
   }
 
   setToken(token: string) {

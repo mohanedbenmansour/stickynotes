@@ -11,13 +11,13 @@ export class PostService {
 
   constructor(private http: HttpClient) {}
   createPost(post: Post) {
-    return this.http.post(environment.baseUri + '/addpost', post);
+    return this.http.post('/addpost', post);
   }
   getPosts(userId: string) {
-    return this.http.get(environment.baseUri + '/getposts/' + userId);
+    return this.http.get('/getposts/' + userId);
   }
   deletePost(id: string) {
-    return this.http.delete(environment.baseUri + '/deletepost/' + id);
+    return this.http.delete('/deletepost/' + id);
   }
   getter() {
     return this.posts;
